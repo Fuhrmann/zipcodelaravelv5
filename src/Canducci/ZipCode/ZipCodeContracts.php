@@ -4,26 +4,26 @@ interface ZipCodeContracts
 {
     /**
      * @param $value
-     * @return ZipCode
-     * @throws ZipCodeException
+     * @return Canducci\ZipCode\ZipCode
+     * @throws Canducci\ZipCode\ZipCodeException
      */
     public function find($value);
 
     /**
      * @return JSON Javascript
-     * @throws ZipCodeException
+     * @throws Canducci\ZipCode\ZipCodeException
      */
     public function toJson();
 
     /**
      * @return Array
-     * @throws ZipCodeException
+     * @throws Canducci\ZipCode\ZipCodeException
      */
     public function toArray();
 
     /**
-     * @return stdClass
-     * @throws ZipCodeException
+     * @return \stdClass
+     * @throws Canducci\ZipCode\ZipCodeException
      */
    public function toObject();
 

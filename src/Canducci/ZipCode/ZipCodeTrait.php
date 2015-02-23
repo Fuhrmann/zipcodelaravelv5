@@ -7,7 +7,8 @@ trait ZipCodeTrait
      * @return Canducci\ZipCode\ZipCode
      * @throws Canducci\ZipCode\ZipCodeException
      */
-    public function zipcode($value) {
+    public function zipcode($value)
+    {
         return zipcode($value);
     }
 }

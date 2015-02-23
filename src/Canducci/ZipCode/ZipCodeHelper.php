@@ -4,8 +4,8 @@
     {
         /**
          * @param $value
-         * @return ZipCode
-         * @throws ZipCodeException
+         * @return Canducci\ZipCode\ZipCode
+         * @throws Canducci\ZipCode\ZipCodeException
          */
         function zipcode($value)
         {

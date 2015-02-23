@@ -11,12 +11,12 @@ class ZipCode implements ZipCodeContracts
     private $value;
 
     /**
-     * @var CacheManager
+     * @var Illuminate\Cache\CacheManager
      */
     private $cacheManager;
 
     /**
-     * @param CacheManager $cacheManager
+     * @param Illuminate\Cache\CacheManager $cacheManager
      */
     public function __construct(CacheManager $cacheManager)
     {
@@ -26,8 +26,8 @@ class ZipCode implements ZipCodeContracts
 
     /**
      * @param $value
-     * @return ZipCode
-     * @throws ZipCodeException
+     * @return Canducci\ZipCode\ZipCode
+     * @throws Canducci\ZipCode\ZipCodeException
      */
     public function find($value)
     {
@@ -40,13 +40,13 @@ class ZipCode implements ZipCodeContracts
 
     /**
      * @return JSON Javascript
-     * @throws ZipCodeException
+     * @throws Canducci\ZipCode\ZipCodeException
      */
     public function toJson()
     {
-        if ($this->cacheManager->has('cep_'.$this->value))
+        if ($this->cacheManager->has('zipcode_'.$this->value))
         {
-            $getCache = $this->cacheManager->get('cep_'.$this->value);
+            $getCache = $this->cacheManager->get('zipcode_'.$this->value);
             if (is_array($getCache))
             {
                 $getCache = json_encode($getCache, JSON_PRETTY_PRINT);
@@ -55,19 +55,22 @@ class ZipCode implements ZipCodeContracts
         }
         else
         {
-            $url = 'http://viacep.com.br/ws/[cep]/json/';
-            $url = str_replace('[cep]', $this->value, $url);
+            $url   = 'http://viacep.com.br/ws/[cep]/json/';
+            $url   = str_replace('[cep]', $this->value, $url);
             $error = null;
             try
             {
                 $get   = file_get_contents($url);
                 $error = json_decode($get);
-                if (isset($error->erro) && $error->erro === true) {
+                if (isset($error->erro) && $error->erro === true)
+                {
                     return null;
                 }
-                $this->cacheManager->forever('cep_'.$this->value, json_decode($get, true));
+                $this->cacheManager->put('zipcode_'.$this->value, json_decode($get, true), 86400);
                 return $get;
-            } catch (ZipCodeException $e) {
+            }
+            catch (ZipCodeException $e)
+            {
                 throw new ZipCodeException("Number and http are invalid");
             }
         }
@@ -75,7 +78,7 @@ class ZipCode implements ZipCodeContracts
 
     /**
      * @return Array
-     * @throws ZipCodeException
+     * @throws Canducci\ZipCode\ZipCodeException
      */
     public function toArray()
     {
@@ -84,13 +87,14 @@ class ZipCode implements ZipCodeContracts
 
     /**
      * @return stdClass
-     * @throws ZipCodeException
+     * @throws Canducci\ZipCode\ZipCodeException
      */
     public function toObject()
     {
         $class = new \stdClass;
         $array = $this->toArray();
-        if (!is_null($array) && is_array($array)) {
+        if (!is_null($array) && is_array($array))
+        {
             $class->cep        = $array['cep'];
             $class->logradouro = $array['logradouro'];
             $class->bairro     = $array['bairro'];

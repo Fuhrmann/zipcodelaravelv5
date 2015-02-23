@@ -53,6 +53,7 @@ class ZipCodeTest extends TestCase
     {
         $zipCode = new Canducci\ZipCode\ZipCode(new Illuminate\Cache\CacheManager(app()));
         $this->assertJson($zipCode->find('01414000')->toJson());
+
     }
 
     public function testZipCodeKeyOfArray()
