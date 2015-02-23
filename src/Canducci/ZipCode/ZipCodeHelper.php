@@ -1,14 +1,18 @@
 <?php namespace {
-    if (!function_exists('zipcode')) {
+
+    if (!function_exists('zipcode'))
+    {
         /**
          * @param $value
-         * @return $this
-         * @throws \Exception
+         * @return ZipCode
+         * @throws ZipCodeException
          */
         function zipcode($value)
         {
-            $zip_code = new Canducci\ZipCode\ZipCode();
+            $zip_code = app('Canducci\ZipCode\ZipCode');
             return $zip_code->find($value);
         }
+
     }
+
 }

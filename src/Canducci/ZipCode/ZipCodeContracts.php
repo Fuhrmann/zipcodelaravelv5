@@ -1,45 +1,30 @@
-<?php namespace Canducci\ZipCode {
+<?php namespace Canducci\ZipCode;
 
-    interface ZipCodeContracts {
-        /**
-         * @param $value
-         * @return mixed
-         */
-        public function find($value);
+interface ZipCodeContracts
+{
+    /**
+     * @param $value
+     * @return ZipCode
+     * @throws ZipCodeException
+     */
+    public function find($value);
 
-        /**
-         * @return mixed
-         */
-        public function toJson();
+    /**
+     * @return JSON Javascript
+     * @throws ZipCodeException
+     */
+    public function toJson();
 
-        /**
-         * @return mixed
-         */
-        public function toArray();
+    /**
+     * @return Array
+     * @throws ZipCodeException
+     */
+    public function toArray();
 
-        /**
-         * @return mixed
-         */
-        public function toObject();
+    /**
+     * @return stdClass
+     * @throws ZipCodeException
+     */
+   public function toObject();
 
-        /**
-         * @return mixed
-         */
-        public function toXml();
-
-        /**
-         * @return mixed
-         */
-        public function toSimpleXml();
-
-        /**
-         * @return mixed
-         */
-        public function toPiped();
-
-        /**
-         * @return mixed
-         */
-        public function toQuerty();
-    }
 }
