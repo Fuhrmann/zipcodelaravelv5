@@ -9,7 +9,7 @@
          */
         function zipcode($value)
         {
-            $zip_code = app('Canducci\ZipCode\ZipCode');
+            $zip_code = app('Canducci\ZipCode\ZipCodeContracts');
             return $zip_code->find($value);
         }
 
