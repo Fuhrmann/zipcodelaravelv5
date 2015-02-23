@@ -100,7 +100,7 @@ __To check if any errors had to do:__
 
 ```PHP
 $cep   = Cep::find('01414001');			
-$dados = $cep->toQuerty();
+$dados = $cep->toArray();
 
 if ($dados) {
 	//ZIP EXISTING
