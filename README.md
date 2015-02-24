@@ -95,7 +95,13 @@ $cep->toObject();
         [ibge] => 3550308
     )
 ```
-    
+__Renew item from cache__
+
+```PHP
+$cep   = Cep::find('01414001');			
+$dados = $cep->renew()->toArray();
+```
+
 __To check if any errors had to do:__
 
 ```PHP
