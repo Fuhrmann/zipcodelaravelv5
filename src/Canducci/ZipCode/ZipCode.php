@@ -4,7 +4,6 @@ use Illuminate\Cache\CacheManager;
 
 class ZipCode implements ZipCodeContracts
 {
-
     /**
      * @var $value
      */
@@ -31,9 +30,14 @@ class ZipCode implements ZipCodeContracts
      */
     public function find($value)
     {
-        if (mb_strlen($value) === 8 || mb_strlen($value) === 9) {
-            $this->value = $value;
-            return $this;
+        if (is_string($value))
+        {
+            $value = str_replace('.', '', $value);
+            $value = str_replace('-', '', $value);
+            if (mb_strlen($value) === 8 && preg_match('/^(\d){8}$/', $value)) {
+                $this->value = $value;
+                return $this;
+            }
         }
         throw new ZipCodeException("Invalid Zip");
     }
@@ -66,14 +70,15 @@ class ZipCode implements ZipCodeContracts
                 {
                     return null;
                 }
-                $this->cacheManager->put('zipcode_'.$this->value, json_decode($get, true), 86400);
+                $this->cacheManager->put('zipcode_' . $this->value, json_decode($get, true), 86400);
                 return $get;
             }
             catch (ZipCodeException $e)
             {
-                throw new ZipCodeException("Number and http are invalid");
+                throw new ZipCodeException("Number and http are invalid", $e->getCode(), $e);
             }
         }
+        return null;
     }
 
     /**
@@ -91,22 +96,22 @@ class ZipCode implements ZipCodeContracts
      */
     public function toObject()
     {
-        $class = new \stdClass;
-        $array = $this->toArray();
-        if (!is_null($array) && is_array($array))
-        {
-            $class->cep        = $array['cep'];
-            $class->logradouro = $array['logradouro'];
-            $class->bairro     = $array['bairro'];
-            $class->localidade = $array['localidade'];
-            $class->uf         = $array['uf'];
-            $class->ibge       = $array['ibge'];
-            return $class;
-        }
-        return null;
+        return json_decode($this->toJson(), false);
     }
 
+    /**
+     * Remove item from cache
+     * @return Canducci\ZipCode\ZipCode
+     */
+    public function renew()
+    {
+        if ($this->value != '')
+        {
+            if ($this->cacheManager->has('zipcode_' . $this->value))
+            {
+                $this->cacheManager->forget('zipcode_' . $this->value);
+            }
+        }
+        return $this;
+    }
 }
-
-
-

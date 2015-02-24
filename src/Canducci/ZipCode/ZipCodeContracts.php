@@ -25,6 +25,12 @@ interface ZipCodeContracts
      * @return \stdClass
      * @throws Canducci\ZipCode\ZipCodeException
      */
-   public function toObject();
+    public function toObject();
+
+    /**
+     * Remove item from cache
+     * @return Canducci\ZipCode\ZipCode
+     */
+    public function renew();
 
 }
