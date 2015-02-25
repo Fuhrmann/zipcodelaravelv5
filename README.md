@@ -50,7 +50,7 @@ use Canducci\ZipCode\Facades\ZipCode;
 To use is very simple, pass the ZIP and calls the various types of returns, like this:
 
 ```PHP
-$cep = Cep::find('01414-001');
+$cep = ZipCode::find('01414-001');
 ```
 
 Type returns:
@@ -98,14 +98,14 @@ $cep->toObject();
 __Renew item from cache__
 
 ```PHP
-$cep   = Cep::find('01414001');			
+$cep   = ZipCode::find('01414001');			
 $dados = $cep->renew()->toArray();
 ```
 
 __To check if any errors had to do:__
 
 ```PHP
-$cep   = Cep::find('01414001');			
+$cep   = ZipCode::find('01414001');			
 $dados = $cep->toArray();
 
 if ($dados) {
