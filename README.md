@@ -8,17 +8,17 @@ __Web Service provided by http://viacep.com.br/__
 
 ### Required setup
 
-In the `require` key of `composer.json` file add the following
+In the `require` key of `composer.json` file add the following:
 
 ```PHP
-"canducci/zipcodelaravel5": "dev-master"
+"canducci/zipcodelaravel5": "2.0.x"
 ```
 
-Run the Composer update comand
+Run the Composer update comand:
 
     $ composer update
 
-In your `config/app.php` add `'Canducci\ZipCode\Providers\ZipCodeServiceProvider'` to the end of the `providers` array
+In your `config/app.php` add `'Canducci\ZipCode\Providers\ZipCodeServiceProvider'` to the end of the `providers` array:
 
 ```PHP
 'providers' => array(
@@ -29,7 +29,7 @@ In your `config/app.php` add `'Canducci\ZipCode\Providers\ZipCodeServiceProvider
 ),
 ```
 
-At the end of `config/app.php` add `'Cep' => 'Canducci\Cep\Facade\Cep'` to the `aliases` array
+At the end of `config/app.php` add `'Cep' => 'Canducci\Cep\Facade\Cep'` to the `aliases` array:
 
 ```PHP
 'aliases' => array(
