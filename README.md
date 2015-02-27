@@ -63,7 +63,8 @@ $cep->toJon();
         "bairro": "Cerqueira César",
         "localidade": "São Paulo",
         "uf": "SP",
-        "ibge": "3550308"
+        "ibge": "3550308", 
+        "complemento": ""
     }
 ```
 
@@ -77,7 +78,8 @@ $cep->toArray();
         [bairro] => Cerqueira César
         [localidade] => São Paulo
         [uf] => SP
-        [ibge] => 3550308
+        [ibge] => 3550308,
+        [complemento] => 
     )
 ```
 
@@ -93,6 +95,7 @@ $cep->toObject();
         [localidade] => São Paulo
         [uf] => SP
         [ibge] => 3550308
+        [complemento] => 
     )
 ```
 __Renew item from cache__
